@@ -1,0 +1,9 @@
+query FetchRecipeList {
+  recipes {
+    id
+    name
+    description
+    image_url
+    __typename
+  }
+}
