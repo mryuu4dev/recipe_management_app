@@ -4,11 +4,15 @@ import 'package:built_value/standard_json_plugin.dart' show StandardJsonPlugin;
 import 'package:gql_code_builder/src/serializers/operation_serializer.dart'
     show OperationSerializer;
 import 'package:rm_graphql_client/src/graphql/operations.data.gql.dart'
-    show GFetchRecipeListData, GFetchRecipeListData_recipes;
+    show
+        GFetchRecipeIngredientsData,
+        GFetchRecipeIngredientsData_ingredients,
+        GFetchRecipeListData,
+        GFetchRecipeListData_recipes;
 import 'package:rm_graphql_client/src/graphql/operations.req.gql.dart'
-    show GFetchRecipeListReq;
+    show GFetchRecipeIngredientsReq, GFetchRecipeListReq;
 import 'package:rm_graphql_client/src/graphql/operations.var.gql.dart'
-    show GFetchRecipeListVars;
+    show GFetchRecipeIngredientsVars, GFetchRecipeListVars;
 import 'package:rm_graphql_client/src/graphql/schema.schema.gql.dart'
     show
         GInt_comparison_exp,
@@ -54,6 +58,10 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   ..add(OperationSerializer())
   ..addPlugin(StandardJsonPlugin());
 @SerializersFor([
+  GFetchRecipeIngredientsData,
+  GFetchRecipeIngredientsData_ingredients,
+  GFetchRecipeIngredientsReq,
+  GFetchRecipeIngredientsVars,
   GFetchRecipeListData,
   GFetchRecipeListData_recipes,
   GFetchRecipeListReq,

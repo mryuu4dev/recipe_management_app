@@ -55,3 +55,55 @@ abstract class GFetchRecipeListData_recipes
       _i1.serializers
           .deserializeWith(GFetchRecipeListData_recipes.serializer, json);
 }
+
+abstract class GFetchRecipeIngredientsData
+    implements
+        Built<GFetchRecipeIngredientsData, GFetchRecipeIngredientsDataBuilder> {
+  GFetchRecipeIngredientsData._();
+
+  factory GFetchRecipeIngredientsData(
+          [Function(GFetchRecipeIngredientsDataBuilder b) updates]) =
+      _$GFetchRecipeIngredientsData;
+
+  static void _initializeBuilder(GFetchRecipeIngredientsDataBuilder b) =>
+      b..G__typename = 'query_root';
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  BuiltList<GFetchRecipeIngredientsData_ingredients> get ingredients;
+  static Serializer<GFetchRecipeIngredientsData> get serializer =>
+      _$gFetchRecipeIngredientsDataSerializer;
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+      GFetchRecipeIngredientsData.serializer, this) as Map<String, dynamic>);
+  static GFetchRecipeIngredientsData? fromJson(Map<String, dynamic> json) =>
+      _i1.serializers
+          .deserializeWith(GFetchRecipeIngredientsData.serializer, json);
+}
+
+abstract class GFetchRecipeIngredientsData_ingredients
+    implements
+        Built<GFetchRecipeIngredientsData_ingredients,
+            GFetchRecipeIngredientsData_ingredientsBuilder> {
+  GFetchRecipeIngredientsData_ingredients._();
+
+  factory GFetchRecipeIngredientsData_ingredients(
+      [Function(GFetchRecipeIngredientsData_ingredientsBuilder b)
+          updates]) = _$GFetchRecipeIngredientsData_ingredients;
+
+  static void _initializeBuilder(
+          GFetchRecipeIngredientsData_ingredientsBuilder b) =>
+      b..G__typename = 'ingredients';
+  int get id;
+  String get name;
+  int get recipe_id;
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  static Serializer<GFetchRecipeIngredientsData_ingredients> get serializer =>
+      _$gFetchRecipeIngredientsDataIngredientsSerializer;
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+          GFetchRecipeIngredientsData_ingredients.serializer, this)
+      as Map<String, dynamic>);
+  static GFetchRecipeIngredientsData_ingredients? fromJson(
+          Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+          GFetchRecipeIngredientsData_ingredients.serializer, json);
+}

@@ -2,6 +2,7 @@
 
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
+import 'package:rm_graphql_client/src/graphql/schema.schema.gql.dart' as _i2;
 import 'package:rm_graphql_client/src/graphql/serializers.gql.dart' as _i1;
 
 part 'operations.var.gql.g.dart';
@@ -21,4 +22,23 @@ abstract class GFetchRecipeListVars
           as Map<String, dynamic>);
   static GFetchRecipeListVars? fromJson(Map<String, dynamic> json) =>
       _i1.serializers.deserializeWith(GFetchRecipeListVars.serializer, json);
+}
+
+abstract class GFetchRecipeIngredientsVars
+    implements
+        Built<GFetchRecipeIngredientsVars, GFetchRecipeIngredientsVarsBuilder> {
+  GFetchRecipeIngredientsVars._();
+
+  factory GFetchRecipeIngredientsVars(
+          [Function(GFetchRecipeIngredientsVarsBuilder b) updates]) =
+      _$GFetchRecipeIngredientsVars;
+
+  _i2.Gingredients_bool_exp? get where;
+  static Serializer<GFetchRecipeIngredientsVars> get serializer =>
+      _$gFetchRecipeIngredientsVarsSerializer;
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+      GFetchRecipeIngredientsVars.serializer, this) as Map<String, dynamic>);
+  static GFetchRecipeIngredientsVars? fromJson(Map<String, dynamic> json) =>
+      _i1.serializers
+          .deserializeWith(GFetchRecipeIngredientsVars.serializer, json);
 }

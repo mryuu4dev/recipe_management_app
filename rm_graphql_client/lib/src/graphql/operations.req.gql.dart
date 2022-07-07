@@ -49,3 +49,44 @@ abstract class GFetchRecipeListReq
   static GFetchRecipeListReq? fromJson(Map<String, dynamic> json) =>
       _i6.serializers.deserializeWith(GFetchRecipeListReq.serializer, json);
 }
+
+abstract class GFetchRecipeIngredientsReq
+    implements
+        Built<GFetchRecipeIngredientsReq, GFetchRecipeIngredientsReqBuilder>,
+        _i1.OperationRequest<_i2.GFetchRecipeIngredientsData,
+            _i3.GFetchRecipeIngredientsVars> {
+  GFetchRecipeIngredientsReq._();
+
+  factory GFetchRecipeIngredientsReq(
+          [Function(GFetchRecipeIngredientsReqBuilder b) updates]) =
+      _$GFetchRecipeIngredientsReq;
+
+  static void _initializeBuilder(GFetchRecipeIngredientsReqBuilder b) => b
+    ..operation = _i4.Operation(
+        document: _i5.document, operationName: 'FetchRecipeIngredients')
+    ..executeOnListen = true;
+  _i3.GFetchRecipeIngredientsVars get vars;
+  _i4.Operation get operation;
+  _i4.Request get execRequest =>
+      _i4.Request(operation: operation, variables: vars.toJson());
+  String? get requestId;
+  @BuiltValueField(serialize: false)
+  _i2.GFetchRecipeIngredientsData? Function(
+          _i2.GFetchRecipeIngredientsData?, _i2.GFetchRecipeIngredientsData?)?
+      get updateResult;
+  _i2.GFetchRecipeIngredientsData? get optimisticResponse;
+  String? get updateCacheHandlerKey;
+  Map<String, dynamic>? get updateCacheHandlerContext;
+  _i1.FetchPolicy? get fetchPolicy;
+  bool get executeOnListen;
+  @override
+  _i2.GFetchRecipeIngredientsData? parseData(Map<String, dynamic> json) =>
+      _i2.GFetchRecipeIngredientsData.fromJson(json);
+  static Serializer<GFetchRecipeIngredientsReq> get serializer =>
+      _$gFetchRecipeIngredientsReqSerializer;
+  Map<String, dynamic> toJson() => (_i6.serializers.serializeWith(
+      GFetchRecipeIngredientsReq.serializer, this) as Map<String, dynamic>);
+  static GFetchRecipeIngredientsReq? fromJson(Map<String, dynamic> json) =>
+      _i6.serializers
+          .deserializeWith(GFetchRecipeIngredientsReq.serializer, json);
+}

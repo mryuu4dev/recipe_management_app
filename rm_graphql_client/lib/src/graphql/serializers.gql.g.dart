@@ -7,6 +7,10 @@ part of 'serializers.gql.dart';
 // **************************************************************************
 
 Serializers _$serializers = (new Serializers().toBuilder()
+      ..add(GFetchRecipeIngredientsData.serializer)
+      ..add(GFetchRecipeIngredientsData_ingredients.serializer)
+      ..add(GFetchRecipeIngredientsReq.serializer)
+      ..add(GFetchRecipeIngredientsVars.serializer)
       ..add(GFetchRecipeListData.serializer)
       ..add(GFetchRecipeListData_recipes.serializer)
       ..add(GFetchRecipeListReq.serializer)
@@ -47,6 +51,10 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(Grecipes_select_column.serializer)
       ..add(Grecipes_set_input.serializer)
       ..add(Grecipes_update_column.serializer)
+      ..addBuilderFactory(
+          const FullType(BuiltList,
+              const [const FullType(GFetchRecipeIngredientsData_ingredients)]),
+          () => new ListBuilder<GFetchRecipeIngredientsData_ingredients>())
       ..addBuilderFactory(
           const FullType(
               BuiltList, const [const FullType(GFetchRecipeListData_recipes)]),

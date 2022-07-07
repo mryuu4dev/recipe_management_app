@@ -7,3 +7,12 @@ query FetchRecipeList {
     __typename
   }
 }
+
+query FetchRecipeIngredients($where: ingredients_bool_exp) {
+  ingredients(where: $where) {
+    id
+    name
+    recipe_id
+    __typename
+  }
+}

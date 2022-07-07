@@ -8,6 +8,9 @@ part of 'operations.var.gql.dart';
 
 Serializer<GFetchRecipeListVars> _$gFetchRecipeListVarsSerializer =
     new _$GFetchRecipeListVarsSerializer();
+Serializer<GFetchRecipeIngredientsVars>
+    _$gFetchRecipeIngredientsVarsSerializer =
+    new _$GFetchRecipeIngredientsVarsSerializer();
 
 class _$GFetchRecipeListVarsSerializer
     implements StructuredSerializer<GFetchRecipeListVars> {
@@ -31,6 +34,56 @@ class _$GFetchRecipeListVarsSerializer
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     return new GFetchRecipeListVarsBuilder().build();
+  }
+}
+
+class _$GFetchRecipeIngredientsVarsSerializer
+    implements StructuredSerializer<GFetchRecipeIngredientsVars> {
+  @override
+  final Iterable<Type> types = const [
+    GFetchRecipeIngredientsVars,
+    _$GFetchRecipeIngredientsVars
+  ];
+  @override
+  final String wireName = 'GFetchRecipeIngredientsVars';
+
+  @override
+  Iterable<Object?> serialize(
+      Serializers serializers, GFetchRecipeIngredientsVars object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[];
+    Object? value;
+    value = object.where;
+    if (value != null) {
+      result
+        ..add('where')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(_i2.Gingredients_bool_exp)));
+    }
+    return result;
+  }
+
+  @override
+  GFetchRecipeIngredientsVars deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new GFetchRecipeIngredientsVarsBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'where':
+          result.where.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(_i2.Gingredients_bool_exp))!
+              as _i2.Gingredients_bool_exp);
+          break;
+      }
+    }
+
+    return result.build();
   }
 }
 
@@ -87,6 +140,99 @@ class GFetchRecipeListVarsBuilder
   @override
   _$GFetchRecipeListVars build() {
     final _$result = _$v ?? new _$GFetchRecipeListVars._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$GFetchRecipeIngredientsVars extends GFetchRecipeIngredientsVars {
+  @override
+  final _i2.Gingredients_bool_exp? where;
+
+  factory _$GFetchRecipeIngredientsVars(
+          [void Function(GFetchRecipeIngredientsVarsBuilder)? updates]) =>
+      (new GFetchRecipeIngredientsVarsBuilder()..update(updates)).build();
+
+  _$GFetchRecipeIngredientsVars._({this.where}) : super._();
+
+  @override
+  GFetchRecipeIngredientsVars rebuild(
+          void Function(GFetchRecipeIngredientsVarsBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GFetchRecipeIngredientsVarsBuilder toBuilder() =>
+      new GFetchRecipeIngredientsVarsBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GFetchRecipeIngredientsVars && where == other.where;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, where.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('GFetchRecipeIngredientsVars')
+          ..add('where', where))
+        .toString();
+  }
+}
+
+class GFetchRecipeIngredientsVarsBuilder
+    implements
+        Builder<GFetchRecipeIngredientsVars,
+            GFetchRecipeIngredientsVarsBuilder> {
+  _$GFetchRecipeIngredientsVars? _$v;
+
+  _i2.Gingredients_bool_expBuilder? _where;
+  _i2.Gingredients_bool_expBuilder get where =>
+      _$this._where ??= new _i2.Gingredients_bool_expBuilder();
+  set where(_i2.Gingredients_bool_expBuilder? where) => _$this._where = where;
+
+  GFetchRecipeIngredientsVarsBuilder();
+
+  GFetchRecipeIngredientsVarsBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _where = $v.where?.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(GFetchRecipeIngredientsVars other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GFetchRecipeIngredientsVars;
+  }
+
+  @override
+  void update(void Function(GFetchRecipeIngredientsVarsBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$GFetchRecipeIngredientsVars build() {
+    _$GFetchRecipeIngredientsVars _$result;
+    try {
+      _$result =
+          _$v ?? new _$GFetchRecipeIngredientsVars._(where: _where?.build());
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'where';
+        _where?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'GFetchRecipeIngredientsVars', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

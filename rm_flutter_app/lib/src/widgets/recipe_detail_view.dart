@@ -1,11 +1,19 @@
+import 'package:ferry/ferry.dart';
+import 'package:ferry_flutter/ferry_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:rm_graphql_client/rm_graphql_client.dart';
 
 class RecipeDetailView extends StatelessWidget {
-  const RecipeDetailView({Key? key, required this.recipe,}) : super(key: key);
+  RecipeDetailView({Key? key, required this.recipe,}) 
+    : ingredientsReq = GFetchRecipeIngredientsReq((b) {
+      return b..vars.where.recipe_id.G_eq = recipe.id;
+    }),
+    super(key: key);
 
   final GFetchRecipeListData_recipes recipe;
+  final GFetchRecipeIngredientsReq ingredientsReq;
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +64,33 @@ class RecipeDetailView extends StatelessWidget {
                       'Ingredients',
                       style: CupertinoTheme.of(context).textTheme.navTitleTextStyle.copyWith(fontSize: 25,),
                     ),
+                    const SizedBox(height: 15,),
+                    Operation(
+                      operationRequest: ingredientsReq, 
+                      builder: (context, OperationResponse<GFetchRecipeIngredientsData, GFetchRecipeIngredientsVars>? response, Object? object) {
+                        if (response == null) {
+                          throw Exception('response object is null');
+                        }
+                        if (response.loading) {
+                          return const Center(child: CircularProgressIndicator(),);
+                        }
+
+                        final ingredients = response.data?.ingredients;
+
+                        if (ingredients == null) {
+                          throw Exception('ingredients object is null');
+                        }
+
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            for (var ingredient in ingredients)
+                              ...[Text(ingredient.name), const SizedBox(height: 10,),],
+                          ],
+                        );
+                      }, 
+                      client: GetIt.instance<Client>(),
+                    ),
                     const SizedBox(height: 40,),
                     Center(
                       child: CupertinoButton(
@@ -64,6 +99,7 @@ class RecipeDetailView extends StatelessWidget {
                         child: const Text('Go back'),
                       ),
                     ),
+                    const SizedBox(height: 40,),
                   ],
                 ),
               ]),
