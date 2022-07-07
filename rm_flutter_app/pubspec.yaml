@@ -21,6 +21,7 @@ dependencies:
   uuid: ^3.0.6
   rm_graphql_client:
     path: ../rm_graphql_client
+  flutter_dotenv: ^5.0.2
 
 dev_dependencies:
   flutter_test:
@@ -33,3 +34,5 @@ dev_dependencies:
 flutter:
 
   uses-material-design: true
+  assets:
+    - .env
