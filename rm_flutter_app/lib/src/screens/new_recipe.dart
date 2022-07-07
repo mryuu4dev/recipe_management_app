@@ -10,11 +10,16 @@ class NewRecipeScreen extends StatelessWidget {
 
   void _addRecipe(BuildContext context, FormValues values) {
     final client = GetIt.instance<Client>();
-    final addRecipeReq = GInsertRecipeReq((b) => 
-      b..vars.object.name = values.name
-       ..vars.object.description = values.description
-       ..vars.object.image_url = values.imageUrl
-    );
+    final addRecipeReq = GInsertRecipeReq((b) {
+      return b..vars.object.name = values.name
+        ..vars.object.description = values.description
+        ..vars.object.image_url = values.imageUrl
+        ..vars.object.ingredients.data.addAll(
+          values.ingredients!.map((ingredient) => Gingredients_insert_input.fromJson( // TODO: ingredients can be null
+            { 'name': ingredient[ingredient.keys.first], },
+          )!)
+        );
+    });
 
     client.request(addRecipeReq).listen((response) {
       // Update cache
@@ -43,9 +48,11 @@ class NewRecipeScreen extends StatelessWidget {
             minimum: const EdgeInsets.all(15),
             sliver: SliverList(
               delegate: SliverChildListDelegate([
+                const SizedBox(height: 10,),
                 RecipeForm(
                   onSubmit: (values) => _addRecipe(context, values),
                 ),
+                const SizedBox(height: 40,),
               ]),
             ),
           ),

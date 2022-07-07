@@ -111,9 +111,12 @@ class RecipeListTile extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            height: 1,
-            color: Colors.grey.shade200,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15,),
+            child: Container(
+              height: 1,
+              color: Colors.grey.shade200,
+            ),
           ),
         ],
       ),

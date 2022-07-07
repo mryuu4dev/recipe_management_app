@@ -29,6 +29,7 @@ class _RecipeFormState extends State<RecipeForm> {
         const SizedBox(height: 10,),
         CupertinoTextField(
           placeholder: 'Description',
+          maxLines: 7,
           padding: const EdgeInsets.all(18),
           onChanged: (value) {
             values.description = value;
@@ -43,7 +44,9 @@ class _RecipeFormState extends State<RecipeForm> {
           },
         ),
         const SizedBox(height: 30,),
-        const IngredientsSection(),
+        IngredientsSection(
+          onUpdate: (value) => values.ingredients = value,
+        ),
         const SizedBox(height: 40,),
         CupertinoButton(
           onPressed: () {
