@@ -1,6 +1,8 @@
+import 'package:ferry/ferry.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:get_it/get_it.dart';
 import 'package:rm_flutter_app/src/widgets/recipe_detail_view.dart';
 import 'package:rm_graphql_client/rm_graphql_client.dart';
 
@@ -10,8 +12,21 @@ class RecipeListTile extends StatelessWidget {
   final GFetchRecipeListData_recipes recipe;
 
   void _removeRecipe(BuildContext context, int recipeId) {
-    // TODO: Perform operation to delete recipe
-    
+    final client = GetIt.instance<Client>();
+    final deleteRecipeReq = GDeleteRecipeReq(
+      (b) => b..vars.id = recipeId
+    );
+
+    client.request(deleteRecipeReq).listen((response) {
+      // Update cache
+      final recipesReq = GFetchRecipeListReq();
+      final cache = client.cache.readQuery(recipesReq);
+      final updateRecipes = GFetchRecipeListData((b) {
+        return b..recipes.addAll(cache!.recipes) // TODO: cache!.recipes is correct?
+                ..recipes.removeWhere((recipe) => recipe.id == response.data?.delete_recipes_by_pk?.id);
+      });
+      client.cache.writeQuery(recipesReq, updateRecipes);
+    });
     Navigator.of(context).pop();
   }
 
@@ -23,7 +38,7 @@ class RecipeListTile extends StatelessWidget {
         children: [
           SlidableAction(
             label: 'Delete',
-            icon: CupertinoIcons.pencil,
+            icon: CupertinoIcons.trash,
             backgroundColor: Colors.blueGrey,
             onPressed: (value) {
               showCupertinoDialog(

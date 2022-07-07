@@ -8,7 +8,8 @@ export 'src/graphql/schema.schema.gql.dart';
 
 Client initClient(String uri) {
   final link = HttpLink(uri);
-  final client = Client(link: link);
+  final cache = Cache();
+  final client = Client(link: link, cache: cache);
 
   return client;
 }
